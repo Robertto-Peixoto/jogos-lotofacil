@@ -11,8 +11,8 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100vh;
       margin: 0;
+      text-align: center;
     }
     .jogo {
       margin: 20px;
@@ -21,6 +21,7 @@
       display: flex;
       flex-wrap: wrap;
       width: 200px;
+      justify-content: center;
     }
     .bolinha {
       width: 30px;
@@ -36,10 +37,28 @@
       background-color: #8f2783; /* Cor roxo claro */
       color: white;
     }
+    .buttons {
+      margin: 20px;
+    }
+    .footer {
+      margin-top: 20px;
+      font-size: 14px;
+    }
+    .footer a {
+      color: #007BFF;
+      text-decoration: none;
+    }
+    .footer a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
   <h1>Sugestões de Jogos para Lotofácil</h1>
+  <div class="buttons">
+    <button onclick="gerarTodosJogos()">Gerar Jogos</button>
+    <button onclick="limparTodosJogos()">Limpar Jogos</button>
+  </div>
   <div class="jogo">
     <h2>JOGO 1</h2>
     <div class="bolinhas" id="jogo1"></div>
@@ -51,6 +70,9 @@
   <div class="jogo">
     <h2>JOGO 3</h2>
     <div class="bolinhas" id="jogo3"></div>
+  </div>
+  <div class="footer">
+    Acesse: <a href="https://lottogame.me/user/register" target="_blank">https://lottogame.me/user/register</a>
   </div>
 
   <script>
@@ -76,9 +98,25 @@
       }
     }
 
-    gerarJogo('jogo1');
-    gerarJogo('jogo2');
-    gerarJogo('jogo3');
+    function gerarTodosJogos() {
+      gerarJogo('jogo1');
+      gerarJogo('jogo2');
+      gerarJogo('jogo3');
+    }
+
+    function limparTodosJogos() {
+      const jogos = ['jogo1', 'jogo2', 'jogo3'];
+      jogos.forEach(jogoId => {
+        const container = document.getElementById(jogoId);
+        const bolinhas = container.getElementsByClassName('bolinha');
+        for (const bolinha of bolinhas) {
+          bolinha.classList.remove('pintada');
+        }
+      });
+    }
+
+    // Gerar jogos iniciais ao carregar a página
+    window.onload = gerarTodosJogos;
   </script>
 </body>
 </html>
