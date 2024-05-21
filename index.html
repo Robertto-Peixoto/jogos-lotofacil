@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jogos Lotofácil</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .jogo {
+      margin: 20px;
+    }
+    .bolinhas {
+      display: flex;
+      flex-wrap: wrap;
+      width: 200px;
+    }
+    .bolinha {
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 2px;
+      border-radius: 50%;
+      border: 1px solid #ccc;
+    }
+    .pintada {
+      background-color: #8f2783; /* Cor roxo claro */
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <h1>Sugestões de Jogos para Lotofácil</h1>
+  <div class="jogo">
+    <h2>JOGO 1</h2>
+    <div class="bolinhas" id="jogo1"></div>
+  </div>
+  <div class="jogo">
+    <h2>JOGO 2</h2>
+    <div class="bolinhas" id="jogo2"></div>
+  </div>
+  <div class="jogo">
+    <h2>JOGO 3</h2>
+    <div class="bolinhas" id="jogo3"></div>
+  </div>
+
+  <script>
+    function gerarJogo(elementId) {
+      const container = document.getElementById(elementId);
+      container.innerHTML = ''; // Limpa o container antes de gerar um novo jogo
+      const numeros = Array.from({ length: 25 }, (_, i) => i + 1);
+      const selecionados = [];
+
+      while (selecionados.length < 15) {
+        const index = Math.floor(Math.random() * numeros.length);
+        selecionados.push(...numeros.splice(index, 1));
+      }
+
+      for (let i = 1; i <= 25; i++) {
+        const div = document.createElement('div');
+        div.classList.add('bolinha');
+        if (selecionados.includes(i)) {
+          div.classList.add('pintada');
+        }
+        div.textContent = i;
+        container.appendChild(div);
+      }
+    }
+
+    gerarJogo('jogo1');
+    gerarJogo('jogo2');
+    gerarJogo('jogo3');
+  </script>
+</body>
+</html>
